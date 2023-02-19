@@ -8,5 +8,7 @@ Use this command to get info about current gcloud CLI account project name and e
 $ gcloud config list
 ```
 
+## project notes
 
+* project names need dashes and not underscores.
 
