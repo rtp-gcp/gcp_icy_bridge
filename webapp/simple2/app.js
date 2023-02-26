@@ -122,7 +122,7 @@ app.get('/predict1.ejs', (req, res) => {
 // GCP specific, is process.env.PORT
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Example app listening on port ${PORT}`)
 })
 
 
