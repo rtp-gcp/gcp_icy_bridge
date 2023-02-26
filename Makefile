@@ -9,7 +9,7 @@
 
 TOPTARGETS := all clean
 
-SUBDIRS := docs 
+SUBDIRS := docs webapp
 #SUBDIRS := docs bin imgs python matlab R raw_data webapp secrets
 #SUBDIRS := docs foo bin imgs python matlab R raw_data
 #SUBDIRS := $(wildcard */.)
