@@ -94,21 +94,14 @@ app.get('/myconfig', (req, res) => {
 
 })
 
-app.get('/predict.ejs', (req, res) => {
+app.get('/doit.ejs', (req, res) => {
 
-  console.log("get /predict.ejs")
+  console.log("get /doit.ejs")
   //console.log(req)
 
-  res.render("predict")
+  res.render("doit")
 })
 
-app.get('/predict1.ejs', (req, res) => {
-
-  console.log("get /predict1.ejs")
-  //console.log(req)
-
-  res.render("predict1")
-})
 
 
 
