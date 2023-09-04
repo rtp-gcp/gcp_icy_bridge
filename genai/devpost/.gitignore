@@ -1,0 +1,7 @@
+# python env
+.env
+# curl/bash env
+.benv
+# gcp application credentials
+application_default_credentials.json
+

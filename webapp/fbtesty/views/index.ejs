@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--meta name="viewport" content="width=device-width", initial-scale=1.0"-->
+<!--meta http-equiv="X-UA-Compatible" content="ie=edge"-->
+
+<!--  
+The type= field needs to match what express provides.  Although the docs
+for Chrome say test/css, express is supplying a mime type of
+text/html in the headers. 
+
+However, it works when its css and it does not work when its html.
+-->
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<link rel="stylesheet" type="text/css" href="css/stylesnav.css">
+<link rel="manifest" href="manifest.json" >
+
+
+
+<meta charset="UTF-8">
+
+<title>App Engine with Firestore and openweathermap.org Demo App</title>
+<link rel="shortcut icon" type="image/png" href="imgs/favicon-16.png">
+</head>
+
+
+<body>
+
+<header class="myheader">
+
+<div class="mydiv">
+
+  <img src="imgs/rtpgcp_single_logo_112x67.png" alt="logo" class="logo">
+
+  <nav>
+    <ul>
+      <li><a href="index.ejs">App</a></li>
+      <li><a href="doit.ejs">Doit</a></li>
+      <li><a href="recipe.ejs">Recipe</a></li>
+      <li><a href="about.ejs">About</a></li>
+    </ul>
+  </nav>
+</div>
+</header>
+
+
+<!-- ---------------------------------------------------------------- -->
+
+
+<div class="the_body">
+
+	<H1> App Engine, Firestore and openweathermap.org API Demo </H1>
+
+  
+  <div>
+    <p> Use doit or recipe page to exercise the app</p>
+    <img src="/imgs/fstesty.png" alt="img" class="img">
+
+  </div>
+
+
+
+
+
+</div> <!-- the body container -->
+</body>
+<footer>
+  <a href="http://www.vim.org/" >
+    <img src="/imgs/vim_header.png" alt="logo" class="logo">
+  </a>
+
+  <a href="https://developer.chrome.com/docs/devtools/" >
+      <img src="imgs/devtools-96x48.png" alt="logo" class="logo">
+  </a>
+</footer>
+
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="css/stylesnav.css">
+        <link rel="manifest" href="manifest.json" >
+
+        <meta charset="UTF-8">
+
+        <title>rtp-gcp.org</title>
+        <link rel="shortcut icon" type="image/png" href="imgs/favicon-16.png">
+
+
+    </head>
+
+    <body>
+
+        <header class="myheader">
+
+            <div class="mydiv">
+
+                <img src="imgs/rtpgcp_single_logo_112x67.png" alt="logo" class="logo">
+                <nav>
+                    <ul>
+                    <li><a href="index.ejs">App</a></li>
+                    <li><a href="doit.ejs">Doit</a></li>
+                    <li><a href="recipe.ejs">Recipe</a></li>
+                    <li><a href="about.ejs">About</a></li>
+                    </ul>
+                </nav>
+
+
+            </div>
+        </header>
+
+
+    <!-- ---------------------------------------------------------------- -->
+
+        <div class="the_body">
+
+
+
+            <!-- 
+             Read Firestore
+            -->
+            <div class="tests">
+
+                <fieldset>
+                    <legend>Read Recipe</legend>
+
+                    <div>
+
+                        <label for="recipes">Choose a recipe:</label>
+                        <select name="recipes" id="s_recipe">
+                        <option value="one">not set 1</option>
+                        </select>                    
+
+                        <button type="button" id="b_rrecipe">Read</button>
+                    </div>
+
+
+
+                    <div>
+                        <label class="labelclass" for="ta_ringredients" vertical-align="top">Read Ingredients</label>
+                        <ul id="ul_ringredients">
+                            <li>not set 1</li>
+                        </ul>
+                    </div>
+
+                    <div>
+
+                        <label class="labelclass" for="ta_rprocedure">Read Procedure</label>
+                        <ul id="ul_rprocedure">
+                            <li>not set 1</li>
+                        </ul>
+                    </div>
+
+            
+
+                    <div>
+
+                        <label class="labelclass" for="ta_rnotes">Read Notes</label>
+                        <textarea id="ta_rnotes" name="ta_rnotes" rows="10" cols="40">none</textarea>
+                    </div>
+                
+
+                    
+                </fieldset>
+
+            </div>
+
+            <!-- 
+                Write Firestore 
+            -->
+            <div class="tests">
+
+                <fieldset>
+                    <legend>Recipe Write API</legend>
+                    
+                    <div>
+                        <label for="t_wcollection">Write Collection</label>
+                        <input type="text" id="t_wcollection" name="t_wcollection" value="recipe"/>
+
+                        <label for="t_wdoc">Write Doc</label>
+                        <input type="text" id="t_wdoc" name="t_wdoc" value="test recipe"/>
+                    </div>
+
+
+                    <div>
+                        <label class="labelclass" for="ta_wingredients" vertical-align="top">Write Ingredients</label>
+                        <ul id="ul_wingredients">
+                            <li>
+                                <textarea id="ta_wingredients" name="ta_wingredients" rows="1" cols="40" >add ingredient here</textarea>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <label for="t_add_ingredient">Add another ingredient</label>
+                        <button type="button" id="b_add_ingredient">add</button>
+                    </div>
+
+
+                    <div>
+                        <label class="labelclass" for="ta_wprocedure" vertical-align="top">Write Procedure</label>
+                        <ol id="ol_wprocedure">
+                            <li>
+                                <textarea id="ta_wstep" name="ta_wstep" rows="1" cols="40">add step here</textarea>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <div>
+                        <label for="t_add_step">Add another step</label>
+                        <button type="button" id="b_add_step">add</button>
+                    </div>
+                    
+
+
+                    <div>
+
+                        <label class="labelclass" for="ta_notes">Write Notes</label>
+                        <textarea id="ta_notes" name="ta_notes" rows="10" cols="40">Test receipe notes go here</textarea>
+                    </div>
+                    
+                    <div>
+
+                        <button type="button" id="b_wcollection">Write</button>
+                    </div>
+                 
+                    <div>
+                        <label class="labelclass" for="wresults" style="vertical-align: top;">Results:</label>
+                        <textarea id="ta_col_wresults" name="wresults" rows="1" cols="40">No write result yet ...</textarea>
+                    </div>
+        
+                    
+                </fieldset>
+
+            </div>
+
+
+
+
+        </div>
+    </body>
+
+
+    <footer>
+        <a href="http://www.vim.org/" >
+            <img src="imgs/vim_header.png" alt="logo" class="logo">
+        </a>
+        <a href="https://developer.chrome.com/docs/devtools/" >
+            <img src="imgs/devtools-96x48.png" alt="logo" class="logo">
+        </a>
+    </footer>
+</html>
+
+
+<!--  
+    SCRIPTS 
+    SCRIPTS 
+    SCRIPTS 
+-->
+<script>
+//console.log("script loaded")
+
+
+
+//
+///////////////////////////////// READ /////////////////////////////////
+//
+
+
+//
+// For the firestore Read API Test,
+//
+// Get the ids for the edit box, the text area and the button.
+
+// Inputs
+// collection is hardcoded to "recipe"
+const byDocComboBox = document.querySelector('#s_recipe');
+// Outputs
+const uiIngredientsReadUList = document.querySelector('#ul_ringredients');
+const uiProcedureReadUList = document.querySelector('#ul_rprocedure');
+const byNotesReadEditBox = document.querySelector('#ta_rnotes');
+// Event Button
+const byRecipeReadButton = document.querySelector('#b_rrecipe');
+
+
+var jsonObj ={"labels":[ {"labelFont":"35pt Calibri","labelLocation":{"x":0.1483, "y":0.75},  "labelText":"fluffer"},{"labelFont":"35pt Calibri","labelLocation":{"x":0.666, "y":0.666},  "labelText":"nutter"}]}; //some json to display
+
+var listEl =document.getElementById('JSONunorderedList');
+listEl = uiIngredientsReadUList;
+//makeList(jsonObj,listEl);
+
+function makeList( jsonObject, listElement) {
+
+    for(var i in jsonObject) { //iterate through the array or object
+        //insert the next child into the list as a <li>
+        var newLI = document.createElement('li');
+        if  (jsonObject[i] instanceof Array) {
+            newLI.innerHTML=i+": ARRAY";
+            newLI.className="arrayOrObject"; //add a class tag so we can style differently
+        } else if (  jsonObject[i] instanceof Object) {
+            newLI.innerHTML=i+": OBJECT";
+            newLI.className="arrayOrObject"; //add a class tag so we can style differently
+        } else {
+            newLI.innerHTML=i+': '+jsonObject[i];
+        }
+        listElement.appendChild(newLI);   
+        //insert a <ul> for nested nodes 
+        if  (jsonObject[i] instanceof Array || jsonObject[i] instanceof Object) {
+            var newUL = document.createElement('ul');
+            //newUL.innerHTML=i;
+            listElement.appendChild(newUL);
+            makeList(jsonObject[i],newUL);
+        }
+    }
+}
+
+//
+// working here
+// 
+
+function myMakeUList(jsonObject, listElement) {
+    // first remove any items in the list
+    while( listElement.firstChild ) {
+        listElement.removeChild( listElement.firstChild );
+    } 
+
+    //iterate through the array or object
+    //console.log("jsonObject: ", jsonObject)
+    //console.log("jsonObject: " + typeof jsonObject)
+    //console.log("---------")
+    //for(var i in jsonObject) {
+        //console.log("i: ", i)
+        //console.log("type of i: " + typeof i)
+    //}    
+}
+
+function myRmUList(listElement) {
+    // first remove any items in the list
+    while( listElement.firstChild ) {
+        listElement.removeChild( listElement.firstChild );
+    } 
+}
+
+
+
+//
+// Add code for Firestore Read API Test
+//
+
+// Lower
+const fetchRecipe = async (doc, url) => {
+
+    //console.log("== fetchCollection() ====")
+    //console.log("doc: " + doc)
+    //console.log("ORIG url: " + url)
+    // The collection is not used here, since the url is 
+    // hardcoded to "recipe"
+    url = url + "/recipe/readFirestore/" + encodeURIComponent(doc)
+    //console.log("MODIFIED url: " + url)
+
+
+    const response = await fetch(url)
+    //console.log("response: ", response);
+    // json is a object of type JSON
+    const json = await response.json();
+    //console.log("json: ", json)
+    //console.log("json: " + typeof json)
+
+    //
+    // Update UI with response from fetch data
+    //
+    // The notes is easy since its just a text area
+    byNotesReadEditBox.value = json.notes
+
+    // TODO: Revisit this, to do myself
+    //myMakeUList(json.ingredients, uiIngredientsReadUList);
+
+    // Clean any existing UI List for ingredients
+    myRmUList(uiIngredientsReadUList);
+    // Rebuild UI list for ingredients
+    makeList(json.ingredients, uiIngredientsReadUList);
+
+    // Clean any existing UI List for procedure
+    myRmUList(uiProcedureReadUList);
+    // Rebuild UI list for procedure
+    makeList(json.procedure, uiProcedureReadUList);
+
+
+}
+
+// Lower
+const fetchAllRecipes = async (url) => {
+
+    //console.log("== fetchAllRecipes() ====")
+    //console.log("ORIG url: " + url)
+    // The collection is not used here, since the url is 
+    // hardcoded to "recipe"
+    url = url + "/recipe/readFirestore/"
+    //console.log("MODIFIED url: " + url)
+
+
+    const response = await fetch(url)
+    //console.log("response: ", response);
+    const json = await response.json();
+    //console.log("json: ", json)
+
+    // Update UI with response from fetch data
+    //byIngredientsReadEditBox.value = json.ingredients
+    //byProcedureReadEditBox.value = json.procedure
+    //byNotesReadEditBox.value = json.notes
+
+    const selectElement = document.getElementById("s_recipe");
+
+    selectElement.remove(0)
+    json.results.forEach(recipe_name => {
+      //console.log(recipe_name);
+      selectElement.options.add(new Option(recipe_name, recipe_name));
+    });    
+
+
+    selectElement.options[0].selected = true; 
+
+}
+
+
+
+
+// Set the event handler for the button
+// Read Upper
+byRecipeReadButton.addEventListener("click", function() {
+    //console.log("== byCollectionReadButton() event handler ======")
+    
+    // Determine the users text for location by name
+    // options[]Text is the actual text shown in the UI control
+    // there is a way to get a value from attritibute on each element
+    const doc = byDocComboBox.options[byDocComboBox.selectedIndex].text;
+
+    console.log("doc: " + doc)
+    // If no location is specified, need to instruct user to specify a location
+    if (doc === "") {
+        docReadResultsTextArea.value = "no doc specified"
+    } else {
+        // Otherwise, use the weather api to get the 
+        // weather for that location
+        // and update the results element
+        //
+        // rewrite url to specify router/ByName
+        var url = window.location.href
+        //console.log("ORIG url: " + url)
+        url = url.slice(0, -11) // also removes trailing slash
+        //console.log("MODIFIED url: " + url)
+        fetchRecipe(doc, url)
+    }
+
+
+});
+
+
+window.onload = function() {
+  // do something when the page loads
+  var url = window.location.href
+  //console.log("ORIG url: " + url)
+  url = url.slice(0, -11) // also removes trailing slash
+  //console.log("MODIFIED url: " + url)
+  fetchAllRecipes(url)
+
+};
+
+
+//
+///////////////////////////////// WRITE /////////////////////////////////
+//
+
+
+//
+// For the firestore Write API Test,
+//
+// Get the ids for the edit box, the text area and the button.
+
+// Inputs
+const byCollectionWriteEditBox = document.querySelector('#t_wcollection');
+const byDocWriteEditBox = document.querySelector('#t_wdoc');
+const byNotesWriteEditBox = document.querySelector('#ta_notes');
+const uiIngredientsWriteUList = document.querySelector('#ul_wingredients');
+const uiProcedureWriteUList = document.querySelector('#ol_wprocedure');
+
+// Buttons
+// This one does a write to the database
+const byCollectionWriteButton = document.querySelector('#b_wcollection');
+// This one does adds a ingredient edit box
+const addIngredientButton = document.querySelector('#b_add_ingredient');
+const addStepButton = document.querySelector('#b_add_step');
+// Status
+const collectionWriteResultsTextArea = document.querySelector('#ta_col_wresults');
+
+
+
+//
+// Code for Firestore Write API Test
+//
+// Set the event handler for the button.  This is the button
+// that reads the attributes for the collection:document we 
+// want to write to firestore.  
+//
+// This sets up an event listener to the button click.  it
+// is the entry point for when the button is clicked.  In 
+// turn, it parses the name (document), recipe, procedure and notes.
+// Afterwards it calls putcollection to create a new
+// collection:doc entry in firestore.
+//
+// write upper
+byCollectionWriteButton.addEventListener("click", async function() {
+    //console.log("== byCollectionWriteButton() event handler ======")
+    
+    // Determine collection, doc, and attributes
+    // These are static text area inputs
+    const collection = byCollectionWriteEditBox.value
+    const doc = byDocWriteEditBox.value
+    const notes = byNotesWriteEditBox.value
+    // These are dynamic text area inputs
+    arrayIngredients = [];
+
+    //console.log("uiIngredientsWriteUList", uiIngredientsWriteUList)
+
+    //
+    // iterate the ingredients - gather ingredients into ingredientsArray
+    //
+    var ingredientsArray = []
+    var allIngredients = document.querySelectorAll('#ta_wingredients')
+    //console.log("allIngredients", allIngredients)
+    var max = allIngredients.length
+    //console.log("max", max)
+    for (var i=0; i<max; i++) {
+        // do something with item
+        //console.log("all[i]: ", allIngredients[i])
+        ingredientsArray.push(allIngredients[i].value)
+    };
+
+
+    //
+    // iterate the procedure - gather steps into stepsArray
+    //
+    var stepsArray = []
+    var allSteps = document.querySelectorAll('#ta_wstep')
+    //console.log("allSteps", allSteps)
+    max = allSteps.length
+    //console.log("max", max)
+    for (var i=0; i<max; i++) {
+        // do something with item
+        //console.log("all[i]: ", allSteps[i])
+        stepsArray.push(allSteps[i].value)
+    };
+
+    // At this point, the ingredientsArray and stepsArray are
+    // populated
+
+
+    //console.log("collection: ", collection)
+    //console.log("doc (recipe name): ", doc)
+    //console.log("ingredientsArray: ", ingredientsArray)
+    //console.log("stepsArray: ", stepsArray)
+    //console.log("notes: ", notes)
+
+
+    // If no location is specified, need to instruct user to specify a location
+    if (collection === "") {
+        collectionWriteResultsTextArea.value = "no collection specified"
+    } else if (doc === "") {
+        collectionWriteResultsTextArea.value = "no doc specified"
+    } else if (notes === "") {
+        collectionWriteResultsTextArea.value = "no notes specified"
+    } else {
+        var url = window.location.href
+        //console.log("ORIG url: " + url)
+        url = url.slice(0, -11) // also removes trailing slash
+        //console.log("MODIFIED url: " + url)
+        let template = '{"ingredients":["yadda1", "yadda2"], \
+                         "procedure": ["yadda3", "yadda4"], \
+                         "notes": "yadda5 yadda6"}'
+        var attributes = JSON.parse(template)
+        attributes.ingredients = ingredientsArray
+        attributes.procedure = stepsArray
+        attributes.notes = notes
+        //console.log("attributes: ", attributes)
+        // This url, is just the server url
+        response = await putCollection(attributes, doc, collection, url)
+        
+        //console.log("response: ", response)
+        //console.log("response.status: ", response.status)
+        collectionWriteResultsTextArea.value = response.status
+
+    }
+
+
+});
+
+// write lower
+const putCollection = async (attributes, doc, collection, url) => {
+
+    //console.log("== putCollection() **** ====")
+    //console.log("collection: ", collection)
+    //console.log("doc: ", doc)
+    //console.log("attributes: ", attributes)
+    // This url should still be the base server url.
+    //console.log("ORIG url: ", url)
+    // TODO: do we need to rewrite doc with spaces as 20s? I think so.
+//    url = url + "/recipe/writeFirestore/" + collection + "/" + doc
+    url = url + "/recipe/writeFirestore/"
+    // append to the url, /recipe/<api entry point>
+    //url = url + "/recipe/foo33"
+    //console.log("MODIFIED url: ", url)
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            collection: collection,
+            doc: doc,
+            attributes: attributes,
+        })
+
+    });
+
+    return response
+}
+
+addIngredientButton.addEventListener("click", function() {
+    //console.log("== addIngredientButton() event handler ======")
+
+
+    var newListItem = document.createElement('li');
+    var newTextArea = document.createElement('textarea');  // just using ta does not work. its readonly
+    newTextArea.textContent = 'Add ingredient here';
+    newTextArea.rows = 1;
+    newTextArea.cols = 40;
+    newTextArea.id = "ta_wingredients";
+    newListItem.appendChild(newTextArea);
+    uiIngredientsWriteUList.appendChild(newListItem);
+
+
+});
+
+addStepButton.addEventListener("click", function() {
+    //console.log("== addStepButton() event handler ======")
+    
+
+    var newListItem = document.createElement('li');
+    var newTextArea = document.createElement('textarea');  // just using ta does not work. its readonly
+    newTextArea.textContent = 'Add step here';
+    newTextArea.rows = 1;
+    newTextArea.cols = 40;
+    newTextArea.id = "ta_wstep";
+    newListItem.appendChild(newTextArea);
+    uiProcedureWriteUList.appendChild(newListItem);
+
+
+});
+
+
+
+</script>

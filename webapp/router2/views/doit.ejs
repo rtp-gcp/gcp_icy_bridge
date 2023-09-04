@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<link rel="stylesheet" type="text/css" href="css/stylesnav.css">
+<link rel="manifest" href="manifest.json" >
+
+<meta charset="UTF-8">
+
+<title>rtp-gcp.org</title>
+<link rel="shortcut icon" type="image/png" href="imgs/favicon-16.png">
+</head>
+
+<body>
+
+<header class="myheader">
+
+<div class="mydiv">
+
+    <img src="imgs/rtpgcp_single_logo_112x67.png" alt="logo" class="logo">
+    <nav>
+        <ul>
+        <li><a href="index.ejs">App</a></li>
+        <li><a href="doit.ejs">Doit</a></li>
+        <li><a href="about.ejs">About</a></li>
+        </ul>
+    </nav>
+
+
+</div>
+</header>
+
+
+<!-- ---------------------------------------------------------------- -->
+
+<div class="the_body">
+
+  <H1> Test Weather API </H1>
+
+  <!-- ---------------------------------------------------------------- -->
+  
+  <div>
+
+    <label for='mode-select'>Choose a mode: (Durham is 4464368) </label>
+
+    <select name='mode' id='mode-select' onchange='onClickMode(this)'>
+        <option value="" >--Please choose an option--</option>
+        <option value="0" selected >Fetch by City Name</option>
+        <option value="1">Fetch by City ID</option>
+    </select>
+
+  </div>
+
+<!-- ---------------------------------------------------------------- -->
+
+
+
+
+  <div>
+  <p> 
+  <label id="l_mode_prompt">Fetch by name</label>
+  <input type="text" id="t_location" name="t_location"></input>
+  <button type="button" id="b_fetch">Fetch</button>
+  </p>
+  </div>
+
+
+  <div>
+    <label for="results">Results:</label>
+
+    <textarea id="ta_results" name="results" rows="10" cols="160">
+    click a button
+    </textarea>
+  </div>
+
+  
+
+
+
+
+</div>
+</body>
+
+<footer>
+    <a href="http://www.vim.org/" >
+        <img src="imgs/vim_header.png" alt="logo" class="logo">
+    </a>
+    <a href="https://developer.chrome.com/docs/devtools/" >
+        <img src="imgs/devtools-96x48.png" alt="logo" class="logo">
+    </a>
+</footer>
+</html>
+
+<script>
+// Get the ids for the edit box, the text area and the button.
+const fetchButton = document.querySelector('#b_fetch');
+const locationEditBox = document.querySelector('#t_location');
+const resultsTextArea = document.querySelector('#ta_results');
+var mode = 0; // Should do this an enum?
+//console.log("script loaded")
+
+// Set the event handler for the button
+fetchButton.addEventListener("click", function() {
+    //console.log("== byNameButton() event handler ======")
+    
+    // Determine the users text for location by name
+    const location = locationEditBox.value
+
+    console.log("location: " + location)
+    // If no location is specified, need to instruct user to specify a location
+    if (location === "") {
+        resultsTextArea.value = "no location specified"
+    } else {
+        // Otherwise, use the weather api to get the 
+        // weather for that location
+        // and update the results element
+        //
+        // rewrite url to specify router/ByName
+        var url = window.location.href
+        //console.log("ORIG url: " + url)
+        url = url.slice(0, -9) // also removes trailing slash
+        //console.log("MODIFIED url: " + url)
+        if (mode === 0) {
+            fetchWeatherByName(location, url)
+        } else if (mode === 1) {
+            fetchWeatherByID(location, url)
+        }
+    }
+
+
+});
+
+const fetchWeatherByName = async (location, url) => {
+
+    //console.log("== fetchWeatherByName() ====")
+    //console.log("location: " + location)
+    //console.log("ORIG url: " + url)
+    url = url + "/router/ByName/" + location
+    //console.log("MODIFIED url: " + url)
+
+    const response = await fetch(url);
+        const jsonData = await response.json();
+        console.log(jsonData);
+
+        resultsTextArea.value = JSON.stringify(jsonData)
+
+}
+
+const fetchWeatherByID = async (location, url) => {
+
+//console.log("== fetchWeatherByName() ====")
+//console.log("location: " + location)
+//console.log("ORIG url: " + url)
+url = url + "/router/ByID/" + location
+//console.log("MODIFIED url: " + url)
+
+const response = await fetch(url);
+    const jsonData = await response.json();
+    console.log(jsonData);
+
+    resultsTextArea.value = JSON.stringify(jsonData)
+
+}
+
+
+
+function onClickMode(item) {
+  console.log(item)
+
+  var selectedItem = item.options[item.selectedIndex]
+  var modePrompt = document.getElementById("l_mode_prompt");
+  
+  //alert("selected item is :" + selectedItem.value)
+
+  switch (selectedItem.value) {
+    case '0':
+      console.log('zero')
+      mode = 0;
+      modePrompt.textContent = "Fetch by name";
+      // change pages
+      //window.location.replace('predict.ejs');
+      break;
+    case '1':
+      console.log('one')
+      mode = 1;
+      modePrompt.textContent = "Fetch by ID";
+      // change pages
+      //window.location.replace('predict1.ejs');
+      break;
+    default:
+      alert('Sorry, we are broken')
+  }
+
+};
+
+
+
+</script>

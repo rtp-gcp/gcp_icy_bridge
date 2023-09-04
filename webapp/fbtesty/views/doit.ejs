@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="css/stylesnav.css">
+        <link rel="manifest" href="manifest.json" >
+
+        <meta charset="UTF-8">
+
+        <title>rtp-gcp.org</title>
+        <link rel="shortcut icon" type="image/png" href="imgs/favicon-16.png">
+
+
+    </head>
+
+    <body>
+
+        <header class="myheader">
+
+            <div class="mydiv">
+
+                <img src="imgs/rtpgcp_single_logo_112x67.png" alt="logo" class="logo">
+                <nav>
+                    <ul>
+                    <li><a href="index.ejs">App</a></li>
+                    <li><a href="doit.ejs">Doit</a></li>
+                    <li><a href="recipe.ejs">Recipe</a></li>
+                    <li><a href="about.ejs">About</a></li>
+                    </ul>
+                </nav>
+
+
+            </div>
+        </header>
+
+
+    <!-- ---------------------------------------------------------------- -->
+
+        <div class="the_body">
+
+
+            <!-- 
+                Test openweathermap.org 
+            -->
+            <div class="tests">
+
+                <fieldset>
+                    <legend>Test openweathermap.org API</legend>
+                    
+                    <div>
+                        <label for="t_byname">Fetch by name</label>
+                        <input type="text" id="t_byname" name="t_byname" value="Durham"/>
+                        <button type="button" id="b_byname">Get</button>
+                    </div>
+
+                    <div>
+                        <label for="results" style="vertical-align: top;">Results:</label>
+                        <textarea id="ta_results" name="results" rows="10" cols="160">
+                        click a button
+                        </textarea>
+                    </div>
+        
+
+                </fieldset>
+
+            </div>
+
+            <!-- 
+                Test Firestore Read
+            -->
+            <div class="tests">
+
+                <fieldset>
+                    <legend>Test Firestore Read API</legend>
+                    
+                    <div>
+                        <label for="t_rcollection">Read Collection</label>
+                        <input type="text" id="t_rcollection" name="t_rcollection" value="users"/>
+                        <button type="button" id="b_rcollection">Read</button>
+                    </div>
+                 
+                    <div>
+                        <label for="rresults" style="vertical-align: top;">Results:</label>
+                        <textarea id="ta_col_rresults" name="rresults" rows="10" cols="160">
+                        No data read yet ...
+                        </textarea>
+                    </div>
+        
+                    
+                </fieldset>
+
+            </div>
+
+            <!-- 
+                Test Firestore Write
+            -->
+            <div class="tests">
+
+                <fieldset>
+                    <legend>Test Firestore Write API</legend>
+                    
+                    <div>
+                        <label for="t_wcollection">Write Collection</label>
+                        <input type="text" id="t_wcollection" name="t_wcollection" value="users"/>
+
+                        <label for="t_wdoc">Write Doc</label>
+                        <input type="text" id="t_wdoc" name="t_wdoc" value="john"/>
+
+
+                        <label for="t_wage">Write Age</label>
+                        <input type="text" id="t_wage" name="t_wage" value="56"/>
+
+                        <button type="button" id="b_wcollection">Write</button>
+                    </div>
+                 
+                    <div>
+                        <label for="wresults" style="vertical-align: top;">Results:</label>
+                        <textarea id="ta_col_wresults" name="wresults" rows="10" cols="160">
+                        No write result yet ...
+                        </textarea>
+                    </div>
+        
+                    
+                </fieldset>
+
+            </div>
+
+
+
+
+        </div>
+    </body>
+
+
+    <footer>
+        <a href="http://www.vim.org/" >
+            <img src="imgs/vim_header.png" alt="logo" class="logo">
+        </a>
+        <a href="https://developer.chrome.com/docs/devtools/" >
+            <img src="imgs/devtools-96x48.png" alt="logo" class="logo">
+        </a>
+    </footer>
+</html>
+
+
+<!--  
+    SCRIPTS 
+    SCRIPTS 
+    SCRIPTS 
+-->
+<script>
+//
+// For the weather API Test,
+//
+// Get the ids for the edit box, the text area and the button.
+const byNameButton = document.querySelector('#b_byname');
+const byNameEditBox = document.querySelector('#t_byname');
+const weatherResultsTextArea = document.querySelector('#ta_results');
+console.log("script loaded")
+
+
+
+//
+// Add code for Firestore API Tests
+// Set the event handler for the button
+byNameButton.addEventListener("click", function() {
+    //console.log("== byNameButton() event handler ======")
+    
+    // Determine the users text for location by name
+    const location = byNameEditBox.value
+
+    console.log("location: " + location)
+    // If no location is specified, need to instruct user to specify a location
+    if (location === "") {
+        resultsTextArea.value = "no location specified"
+    } else {
+        // Otherwise, use the weather api to get the 
+        // weather for that location
+        // and update the results element
+        //
+        // rewrite url to specify router/ByName
+        var url = window.location.href
+        //console.log("ORIG url: " + url)
+        url = url.slice(0, -9) // also removes trailing slash
+        //console.log("MODIFIED url: " + url)
+        fetchWeatherByName(location, url)
+    }
+
+
+});
+
+
+const fetchWeatherByName = async (location, url) => {
+
+//console.log("== fetchWeatherByName() ====")
+//console.log("location: " + location)
+//console.log("ORIG url: " + url)
+url = url + "/weather/ByName/" + location
+//console.log("MODIFIED url: " + url)
+
+const response = await fetch(url);
+    const jsonData = await response.json();
+    console.log(jsonData);
+
+    weatherResultsTextArea.value = JSON.stringify(jsonData)
+
+}
+
+
+//
+// For the firestore Read API Test,
+//
+// Get the ids for the edit box, the text area and the button.
+const byCollectionReadButton = document.querySelector('#b_rcollection');
+const byCollectionReadEditBox = document.querySelector('#t_rcollection');
+const collectionReadResultsTextArea = document.querySelector('#ta_col_rresults');
+
+
+
+//
+// Add code for Firestore Read API Test
+//
+// Set the event handler for the button
+byCollectionReadButton.addEventListener("click", function() {
+    console.log("== byCollectionReadButton() event handler ======")
+    
+    // Determine the users text for location by name
+    const collection = byCollectionReadEditBox.value
+
+    console.log("collection: " + collection)
+    // If no location is specified, need to instruct user to specify a location
+    if (collection === "") {
+        collectionReadResultsTextArea.value = "no collection specified"
+    } else {
+        // Otherwise, use the weather api to get the 
+        // weather for that location
+        // and update the results element
+        //
+        // rewrite url to specify router/ByName
+        var url = window.location.href
+        //console.log("ORIG url: " + url)
+        url = url.slice(0, -9) // also removes trailing slash
+        //console.log("MODIFIED url: " + url)
+        fetchCollection(collection, url)
+    }
+
+
+});
+
+const fetchCollection = async (collection, url) => {
+
+    console.log("== fetchCollection() ====")
+    console.log("collection: " + collection)
+    console.log("ORIG url: " + url)
+    url = url + "/myfs/readFirestore/" + collection
+    console.log("MODIFIED url: " + url)
+
+    const response = await fetch(url);
+        const jsonData = await response.json();
+        console.log("jsonData: BEGIN");
+        //console.log("jsonData: " + JSON.stringify(jsonData));
+        console.log(jsonData);
+        console.log("jsonData: END");
+
+        collectionReadResultsTextArea.value = JSON.stringify(jsonData)
+
+}
+
+
+//
+// For the firestore Write API Test,
+//
+// Get the ids for the edit box, the text area and the button.
+const byCollectionWriteButton = document.querySelector('#b_wcollection');
+const byCollectionWriteEditBox = document.querySelector('#t_wcollection');
+const byDocWriteEditBox = document.querySelector('#t_wdoc');
+const byAgeWriteEditBox = document.querySelector('#t_wage');
+const collectionWriteResultsTextArea = document.querySelector('#ta_col_wresults');
+
+
+
+//
+// Code for Firestore Write API Test
+//
+// Set the event handler for the button
+byCollectionWriteButton.addEventListener("click", function() {
+    console.log("== byCollectionWriteButton() event handler ======")
+    
+    // Determine collection, doc, and age
+    const collection = byCollectionWriteEditBox.value
+    const doc = byDocWriteEditBox.value
+    const age = byAgeWriteEditBox.value
+
+    console.log("collection: ", collection)
+    console.log("doc: ", doc)
+    console.log("age: ", age)
+    // If no location is specified, need to instruct user to specify a location
+    if (collection === "") {
+        collectionWriteResultsTextArea.value = "no collection specified"
+    } else if (doc === "") {
+        collectionWriteResultsTextArea.value = "no doc specified"
+    } else if (age === "") {
+        collectionWriteResultsTextArea.value = "no age specified"
+    } else {
+        // Otherwise, use the weather api to get the 
+        // weather for that location
+        // and update the results element
+        //
+        // rewrite url to specify router/ByName
+        var url = window.location.href
+        //console.log("ORIG url: " + url)
+        url = url.slice(0, -9) // also removes trailing slash
+        //console.log("MODIFIED url: " + url)
+        putCollection(age, doc, collection, url)
+    }
+
+
+});
+
+
+const putCollection = async (age, doc, collection, url) => {
+
+console.log("== putCollection() ====")
+console.log("collection: ", collection)
+console.log("doc: ", doc)
+console.log("age: ", age)
+console.log("ORIG url: ", url)
+url = url + "/myfs/writeFirestore/" + collection + "/" + doc + "/" + age
+console.log("MODIFIED url:", url)
+
+
+const response = await fetch(url);
+    const jsonData = await response.json();
+    console.log("jsonData: BEGIN");
+    //console.log("jsonData: " + JSON.stringify(jsonData));
+    console.log(jsonData);
+    console.log("jsonData: END");
+
+    collectionWriteResultsTextArea.value = JSON.stringify(jsonData)
+
+}
+
+
+
+</script>
