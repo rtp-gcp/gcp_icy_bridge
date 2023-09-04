@@ -6,6 +6,7 @@
 *.BACKUP
 .env
 application_default_credentials.json
+webapp/myenvs/try1/
 
 
 
