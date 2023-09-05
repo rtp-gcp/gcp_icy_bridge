@@ -1,0 +1,7 @@
+path: /notebooks/icy-bridges-detection/data
+train: images/train
+val: images/validate
+
+names:
+  0: bridge
+  1: icy_bridge
