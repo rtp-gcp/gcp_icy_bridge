@@ -7,5 +7,7 @@ This is primarily for Google related frameworks, but also contains OpenAI ChatGP
 # URLS
 
 * [prompt engineering techniques article](https://cobusgreyling.medium.com/12-prompt-engineering-techniques-644481c857aa)
+* [chat gpt internals](https://towardsdatascience.com/inside-gpt-i-1e8840ca8093)
+
 
 
