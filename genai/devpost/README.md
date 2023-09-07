@@ -10,6 +10,7 @@
 * [Square Developer API](https://developer.squareup.com/)
 * [Google Developer API](https://developers.google.com/focus/ai-development)
 * [devpost hackathon](https://square-google-ai.devpost.com/)
+* [recommended url by square regarding sellers](https://www.sellercommunity.com/t5/Developer-Discussions/bd-p/developers)
 
 
 # Required API Usages
