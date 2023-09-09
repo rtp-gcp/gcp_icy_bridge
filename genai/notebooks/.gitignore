@@ -1,3 +1,6 @@
 myenv/*
 
+.env
 
+# gcp application credentials
+application_default_credentials.json
