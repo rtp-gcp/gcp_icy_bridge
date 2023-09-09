@@ -1,5 +1,20 @@
+# dataframe
 pandas
+# yahoo finance
 yfinance
+# open ai
 openai
+# plat
 plotly
+# ???
 nbformat
+# old gcp ai api?
+google-cloud-aiplatform
+# square api
+squareup
+# langchain api
+langchain
+# allows .env file in current dir
+python-dotenv
+# ?
+shapely<2.0.0

@@ -16,6 +16,7 @@ jupyter/inotebooks
     4.  source myenv/bin/activate
     5.  pip install --upgrade pip
     6.  python -m pip install numpy
+        - python install -r requirements.txt
     7. add .gitignore for myenv
 4. setup python inpreter for the workspace
     1. cmd shift p to bring up command window
