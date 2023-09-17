@@ -4,6 +4,7 @@
 *.swap
 *.backup
 *.BACKUP
+.DS_Store
 .env
 application_default_credentials.json
 webapp/myenvs/try1/
