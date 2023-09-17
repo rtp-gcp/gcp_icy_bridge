@@ -11,6 +11,10 @@
 * [Google Developer API](https://developers.google.com/focus/ai-development)
 * [devpost hackathon](https://square-google-ai.devpost.com/)
 * [recommended url by square regarding sellers](https://www.sellercommunity.com/t5/Developer-Discussions/bd-p/developers)
+* [architecture](https://jamboard.google.com/d/1JzK6G_0dXeQbO9hn1cRglIOKM3M9DumtcLcAYPRXDjI/edit?usp=sharing)
+* [square webapp docs](https://developer.squareup.com/docs/app-marketplace)
+* [google payments api](https://developers.google.com/pay/api/web/overview)
+* [square sellers store homepage](https://squareup.com/dashboard/sites)
 
 
 # Required API Usages
