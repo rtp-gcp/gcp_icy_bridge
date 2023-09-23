@@ -10,10 +10,13 @@ plotly
 nbformat
 # old gcp ai api?
 google-cloud-aiplatform
+
 # square api
-squareup
+#squareup
 # square api - this does not work. It requires a git clone
 #square-python-sdk
+git+https://github.com/square/square-python-sdk.git
+
 
 # langchain api
 langchain
