@@ -15,7 +15,11 @@
 * [square webapp docs](https://developer.squareup.com/docs/app-marketplace)
 * [google payments api](https://developers.google.com/pay/api/web/overview)
 * [square sellers store homepage](https://squareup.com/dashboard/sites)
-
+* [square sandbox](https://developer.squareup.com/docs/devtools/sandbox/overview)
+* [setup free online store workflow](https://squareup.com/us/en/the-bottom-line/starting-your-business/how-to-start-a-free-online-store)
+* [square dashboard](https://square.online/app/home/users/147028449/sites/933423469753632432/dashboard)
+* [square guide for upsert](https://developer.squareup.com/docs/catalog-api/build-with-catalog)
+* [square upsert api](https://developer.squareup.com/reference/square/catalog-api/upsert-catalog-object)
 
 # Required API Usages
 

@@ -12,6 +12,9 @@ nbformat
 google-cloud-aiplatform
 # square api
 squareup
+# square api - this does not work. It requires a git clone
+#square-python-sdk
+
 # langchain api
 langchain
 # allows .env file in current dir
