@@ -12,10 +12,9 @@ nbformat
 google-cloud-aiplatform
 
 # square api
-#squareup
-# square api - this does not work. It requires a git clone
-#square-python-sdk
-git+https://github.com/square/square-python-sdk.git
+squareup
+#square-python-sdk via git
+#git+https://github.com/square/square-python-sdk.git
 
 
 # langchain api
