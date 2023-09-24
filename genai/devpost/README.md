@@ -21,6 +21,12 @@
 * [square guide for upsert](https://developer.squareup.com/docs/catalog-api/build-with-catalog)
 * [square upsert api](https://developer.squareup.com/reference/square/catalog-api/upsert-catalog-object)
 
+### The hot list
+* [square dashboard](https://squareup.com/dashboard/)
+* [online store](https://rtp-gcp-usergroup.square.site/)
+* [square api docs](https://developer.squareup.com/docs/catalog-api/search-catalog-objects)
+* [square api explorer](https://developer.squareup.com/explorer/square/catalog-api/list-catalog)
+
 # Required API Usages
 
 * Square Terminal API, Subscriptions API, Invoices API
