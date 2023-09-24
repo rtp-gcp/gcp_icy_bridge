@@ -16,6 +16,8 @@ squareup
 #square-python-sdk via git
 #git+https://github.com/square/square-python-sdk.git
 
+# for secure random uuids
+uuid
 
 # langchain api
 langchain
