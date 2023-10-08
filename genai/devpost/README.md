@@ -41,6 +41,11 @@ Manages Orders.  Require use of order API
 
 https://developer.squareup.com/reference/square/orders-api
 
+# Invoices
+
+Use the squareup webpage to create a sample invoice.  Click the notification icon at top right, select invoice, then
+select send test invoice.
+
 
 # setup gcp
 
