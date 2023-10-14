@@ -1,3 +1,10 @@
+
+# before running this script, do
+# gcloud auth login
+# 
+# then do
+# gcloud config set project devpost-goog-sq
+
 SERVICE_ACCOUNT_ID=jams-devpost-sa
 PROJECT_ID=$(gcloud config get-value core/project)
 

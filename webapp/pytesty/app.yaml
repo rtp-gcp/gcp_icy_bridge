@@ -13,6 +13,20 @@
 # limitations under the License.
 
 runtime: python39
+#service_account: jams-devpost-sa@jams-devpost.iam.gserviceaccount.com
+#service_account: devpost-goog-sq@appspot.gserviceaccount.com
+#service_account: jams-devpost-sa@devpost-goog-sq.iam.gserviceaccount.com
+
+# what is in the app engine config
+# jams-devpost@appspot.gserviceaccount.com
+
+
+# SEcond project default service account for app engine
+#service_account: devpost-goog-sq@appspot.gserviceaccount.com
+
+# this service account worked
+service_account: jams-devpost-sa@devpost-goog-sq.iam.gserviceaccount.com
+
 
 handlers:
   # This configures Google App Engine to serve the files in the app's static

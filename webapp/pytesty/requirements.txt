@@ -1,1 +1,37 @@
-Flask==2.1.0
+Flask==3.0.0
+
+
+# allows .env file in current dir
+python-dotenv
+
+
+
+# yahoo finance
+#yfinance
+# open ai
+#openai
+# plat
+#plotly
+# ???
+#nbformat
+
+
+
+# old gcp ai api?
+google-cloud-aiplatform
+
+# square api
+squareup
+
+
+# render json results as a table in flask
+pandas
+
+
+# for secure random uuids
+uuid
+
+# langchain api
+#langchain
+# ?
+#shapely<2.0.0
