@@ -1,10 +1,15 @@
 # GCP notes
 
+
+<!--
+
 ## images 
 ![../../imgs/image](../../imgs/GCP_models1.png)
 ![../../imgs/image](../../imgs/GCP_models2.png)
 ![../../imgs/image](../../imgs/GCP_AI_Portfolio.png)
 ![../../imgs/image](../../imgs/GCP_foundation_models.png)
+
+-->
 
 ## notes
 
@@ -50,11 +55,12 @@ Other models
 * [Codey APIs](https://cloud.google.com/vertex-ai/docs/generative-ai/code/code-models-overview)
 * [Generative AI Studio](https://cloud.google.com/vertex-ai/docs/generative-ai/learn/generative-ai-studio)
 * [tuning a model](https://cloud.google.com/vertex-ai/docs/generative-ai/start/quickstarts/quickstart-tuning#generative-ai-tune-model-console)
-* [tune a code model](https://cloud.google.com/vertex-ai/docs/generative-ai/models/tune-code-models)
+tune-code-models)
 * [duet](https://cloud.google.com/blog/products/application-development/introducing-duet-ai-for-developers)
 * [duet video](https://www.youtube.com/watch?v=g5TwQx60NXs)
 * [bc hero game](https://www.cloudskillsboost.google/games/4348)
-* [duet ai for gcp](https://cloud.google.com/blog/products/application-modernization/introducing-duet-ai-for-google-cloud]
-
+* [duet ai for gcp](https://cloud.google.com/blog/products/application-modernization/introducing-duet-ai-for-google-cloud)
+* [gcp gen ai github](https://github.com/GoogleCloudPlatform/generative-ai)
+* [tune a code model](https://cloud.google.com/vertex-ai/docs/generative-ai/models)
 
 
