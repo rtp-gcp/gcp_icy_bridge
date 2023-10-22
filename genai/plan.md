@@ -54,7 +54,10 @@ There is no API for Bard and this is not suitable for production image classfier
 
 Other google services are worth a look on image classification.
 
+### Devpost Hackathon    
+Completed the devpost hackathon 20231020
 
+It used Square and Vertex AI APIs.  We learned how to use Vertex API with a notebook and App Engine Webapp in python.
 
 
 ## Amazon Web Services (AWS) specific implementation
