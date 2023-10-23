@@ -2,7 +2,11 @@
 
 * [gcp doc on model tuning Root](https://cloud.google.com/vertex-ai/docs/generative-ai/start/quickstarts/quickstart-tuning#generative-ai-tune-model-console)
 * [better](https://cloud.google.com/vertex-ai/docs/generative-ai/models/tune-models)
-* 
+* [and](https://cloud.google.com/vertex-ai/docs/generative-ai/models/tune-text-models-supervised)
+
+
+
+
 # Steps
 
 ## Step 1 
