@@ -10,6 +10,8 @@ This is primarily for Google related frameworks, but also contains OpenAI ChatGP
 * [chat gpt internals](https://towardsdatascience.com/inside-gpt-i-1e8840ca8093)
 * [platypus](https://levelup.gitconnected.com/platypus-quick-cheap-and-powerful-llm-404b86af8755)
 * [prompt engineering detailed usage guid](https://medium.com/mlearning-ai/i-scanned-1000-prompts-so-you-dont-have-to-10-need-to-know-techniques-a77bcd074d97)
+* [medium post on fine tuning](https://towardsdatascience.com/fine-tuning-large-language-models-llms-23473d763b91)
+
 
 
 
