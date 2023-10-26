@@ -45,3 +45,29 @@ The form of the example data is:
     - "context: <some context>"
 * output_text
     - "a word or sentence of expected answer to question and given context"
+
+Save this data as a file with extension `.jsonl` and upload the file to the bucket
+
+
+## Things to do
+
+* enable all recommended Vertex AI APIs
+* enable model tuning API
+* Create one bucket for working storage
+    - use this bucket for both working storage and model tuning data
+    - upload the jsonl data as part of the console gui
+
+* Vertex AI
+    - Generative AI Studio
+        - Language
+            - click tuning tab
+                - click create a tuned model
+
+## problems encountered
+
+* Following the guide, we just enabled model tuning API.
+    * During the model tuning workflow wizard, it gave a "internal error" error message.
+    * Fixed by going back to the Vertex AI and clicking the enable all recommended APIs button
+* We had a problem with the input data set, where the file name extension was `.JSONL` 
+    * we tried to rename the file, clone the failed job and rerun, but it had the same error.
+    * we deleted the two model jobs, deleted the working storage for the model tuning pipeline and started again fresh.
