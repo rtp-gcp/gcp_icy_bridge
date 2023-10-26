@@ -29,7 +29,7 @@ TODO: its a input output loop capability which allows you to chain prompt output
 * [TechLead](https://youtu.be/9AXP7tCI9PI?si=RAKqKwRCrmw6Uc5J)
 * [Better w/ AI](https://youtu.be/_yzmQbez7gk?si=BBUDP56YLpkG7dCG)
     - Look at this one first
-
+    - [his code](https://www.haihai.ai/finetune/)
 
 * [rabbitmetrics](https://youtu.be/aywZrzNaKjs?si=6IJXVmT4uAb2g1N2)
 
