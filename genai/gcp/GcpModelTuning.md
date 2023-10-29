@@ -50,3 +50,15 @@ The form of the example data is:
     - "context: <some context>"
 * output_text
     - "a word or sentence of expected answer to question and given context"
+ 
+
+### model tuning  quota notes
+
+Made a request to request additional quota in order to fine tune a model.
+
+#### References
+
+* Filter text to find quota request
+    - `training Nvidia A100 80GB GPUs per region`
+* [url for reference](https://cloud.google.com/vertex-ai/docs/generative-ai/models/tune-models#quota)
+   
